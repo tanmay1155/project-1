@@ -1,0 +1,28 @@
+import sys
+import turtle
+import random
+
+CELL_SIZE = 10
+
+
+class LifeBoard:
+    def __init__(self, xsize, ysize):
+        self.state = set()
+        self.xsize, self.ysize = xsize, ysize
+
+    def is_legal(self, x, y):
+        return (0 <= x < self.xsize) and (0 <= y < self.ysize)
+
+    def set(self, x, y):
+        if not self.is_legal(x, y):
+            raise ValueError("Coordinates {}, {} out of range 0..{}, 0..{}".format(x, y, self.xsize, self.ysize))
+
+        key = (x, y)
+        self.state.add(key)
+
+    def makeRandom(self):
+        self.erase()
+        for i in range(0, self.xsize):
+            for j in range(0, self.ysize):
+                if random.random() > 0.5:
+                    
